@@ -2,7 +2,7 @@
     "name": "Mamá Track",
     "short_name": "MamáTrack",
     "description": "Tu compañera en cada contracción",
-    "start_url": "/mama-track/",
+    "start_url": "/Mama-Track/",
     "display": "standalone",
     "background_color": "#fce4ec",
     "theme_color": "#f48fb1",
