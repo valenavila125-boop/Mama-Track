@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mamá Track</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- PANTALLA LOGIN -->
+    <div id="screen-login" class="screen active">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="login-container">
+            <div class="login-icon">♡</div>
+            <h1>Mamá <em>Track</em></h1>
+            <p class="login-sub">Tu compañera en cada momento</p>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Nombre" autocomplete="off"/>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña"/>
+            </div>
+            <label class="remember">
+                <input type="checkbox" id="remember">
+                <span class="checkmark"></span>
+                Mantener sesión activa!
+            </label>
+            <button class="btn-login" onclick="login()">Entrar ✨</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL -->
+    <div id="screen-main" class="screen">
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+
+        <!-- HEADER -->
+        <div class="main-header">
+            <div class="display-mini" onclick="goTo('screen-history')">
+                <span class="mini-icon">≡</span>
+                <span id="mini-last">Sin registros</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">Salir</button>
+        </div>
+
+        <!-- SEMAFORO -->
+        <div class="semaforo-wrap">
+            <div id="semaforo" class="semaforo verde">
+                <div class="semaforo-dot"></div>
+                <span id="semaforo-text">Todo tranquilo 🌿</span>
+            </div>
+        </div>
+
+        <!-- BOTON CONTRACCION TIMER -->
+        <div class="contraction-wrap">
+            <div id="contraction-ring" class="contraction-ring idle">
+                <button id="btn-contraction" class="btn-contraction-main" onclick="toggleContraction()">
+                    <span id="contraction-label">CONTRACCIÓN</span>
+                    <span id="contraction-timer" class="contraction-timer">Tocá para iniciar</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- BOTONES SECUNDARIOS -->
+        <div class="secondary-buttons">
+            <button class="btn-secondary btn-mov" onclick="showPanel('movement')">
+                <span>○</span> Movimiento
+            </button>
+            <button class="btn-secondary btn-water" onclick="confirmWater()">
+                <span>💧</span> Rompí bolsa
+            </button>
+        </div>
+
+        <!-- PANEL DOLOR -->
+        <div id="panel-pain" class="panel hidden">
+            <div class="panel-handle"></div>
+            <h3>¿Cómo fue el dolor?</h3>
+            <p class="panel-sub">Del 1 (leve) al 10 (muy intenso)</p>
+            <div class="pain-grid">
+                <button onclick="registerContraction(1)" class="pain-btn low">1</button>
+                <button onclick="registerContraction(2)" class="pain-btn low">2</button>
+                <button onclick="registerContraction(3)" class="pain-btn low">3</button>
+                <button onclick="registerContraction(4)" class="pain-btn mid">4</button>
+                <button onclick="registerContraction(5)" class="pain-btn mid">5</button>
+                <button onclick="registerContraction(6)" class="pain-btn mid">6</button>
+                <button onclick="registerContraction(7)" class="pain-btn high">7</button>
+                <button onclick="registerContraction(8)" class="pain-btn high">8</button>
+                <button onclick="registerContraction(9)" class="pain-btn high">9</button>
+                <button onclick="registerContraction(10)" class="pain-btn high">10</button>
+            </div>
+        </div>
+
+        <!-- PANEL MOVIMIENTO -->
+        <div id="panel-movement" class="panel hidden">
+            <div class="panel-handle"></div>
+            <h3>¿Dónde se mueve?</h3>
+            <p class="panel-sub">Indicá la posición del bebé</p>
+            <div class="movement-grid">
+                <button onclick="registerMovement('Arriba')" class="movement-btn">
+                    <span class="mov-icon">⬆️</span> Arriba
+                </button>
+                <button onclick="registerMovement('Medio')" class="movement-btn">
+                    <span class="mov-icon">↔️</span> Medio
+                </button>
+                <button onclick="registerMovement('Abajo')" class="movement-btn">
+                    <span class="mov-icon">⬇️</span> Abajo
+                </button>
+            </div>
+            <button class="btn-cancel" onclick="hidePanel()">Cancelar</button>
+        </div>
+
+        <!-- OVERLAY -->
+        <div id="overlay" class="overlay hidden" onclick="hidePanel()"></div>
+    </div>
+
+    <!-- PANTALLA HISTORIAL -->
+    <div id="screen-history" class="screen">
+        <div class="blob blob-5"></div>
+        <div class="history-header">
+            <button class="btn-back" onclick="goTo('screen-main')">← Volver</button>
+            <h2>Historial</h2>
+            <button class="btn-clear" onclick="clearHistory()">Limpiar</button>
+        </div>
+        <div class="stats-bar" id="stats-bar"></div>
+        <div id="history-list" class="history-list"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
